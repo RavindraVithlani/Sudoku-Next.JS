@@ -3,13 +3,15 @@ import { TextField, Grid } from '@mui/material';
 
 const Cell = ({ value, readonly, onChange, group }) => {
   const handleChange = (event) => {
-    onChange(event.target.value, event.target.getAttribute('data-group'), event.target);
+    if (event.target.value!=='0'){
+      onChange(event.target.value, event.target.getAttribute('data-group'), event.target);
+    }
+   
   };
 
   // Determine background color based on the group
   const backgroundColor = (group % 2 === 0) ? 'rgb(226 190 249)' : 'rgb(176 62 247)';
-  const textColor = (group % 2 === 0) ? 'black' : 'white'; // Ensure text color is readable
-  const borderColor = (group % 2 !== 0) ? 'rgb(176 62 247)' : 'rgb(226 190 249)';
+  const textColor = (group % 2 === 0) ? 'black' : 'white'; 
   return (
     <Grid item xs={1}>
       <TextField
@@ -20,13 +22,14 @@ const Cell = ({ value, readonly, onChange, group }) => {
           pattern: '[1-9]',
           style: {
             textAlign: 'center',
-            backgroundColor, // Apply background color
+            backgroundColor: backgroundColor, 
             color: textColor, // Apply text color
             borderRadius: '5px',
-            cursor:'pointer'
+            cursor:'pointer',
           },
           "data-group": group,
           maxLength:1,
+          autoComplete: 'off',
         }}
         value={value || ''}
         onChange={handleChange}
@@ -36,8 +39,6 @@ const Cell = ({ value, readonly, onChange, group }) => {
             '& fieldset': {
               borderColor: 'transparent', // Inherit the color of the border
               margin: '0',
-              borderRadius: '10px',
-              
             }
           }
         }}

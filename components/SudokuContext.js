@@ -7,7 +7,8 @@ import { emptyGrid } from '@/utils/appconfig';
 
 // Create a provider component
 export const SudokuProvider = ({ children }) => {
-    const [sudokuGrid, setSudokuGrid] = useState(emptyGrid);
+    const clonedGrid = emptyGrid.map(row => row.map(cell => ({ ...cell })));
+    const [sudokuGrid, setSudokuGrid] = useState(clonedGrid);
     const showSnackbar = useSnackbar();
       
 
@@ -21,7 +22,7 @@ export const SudokuProvider = ({ children }) => {
       setSudokuGrid(updatedGrid);
     }
     else{
-      showSnackbar("Invalid Entry");
+      showSnackbar("Invalid Entry",'error','red');
     }
 
     
@@ -29,7 +30,7 @@ export const SudokuProvider = ({ children }) => {
   };
 
   return (
-    <SudokuContext.Provider value={{ sudokuGrid, onCellChange }}>
+    <SudokuContext.Provider value={{ sudokuGrid, onCellChange,setSudokuGrid }}>
       {children}
     </SudokuContext.Provider>
   );

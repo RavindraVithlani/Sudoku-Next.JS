@@ -10,14 +10,13 @@ import { useSudoku } from '../components/SudokuContext';
 
 
 const Home = () => {
-  
-
+  const [editing, setEditing] = useState(false);
   return (
     <>
     <SnackBarProvider>
       <SudokuProvider>
-        <Game/>
-        <Toolbar />
+        <Game editing={editing}/>
+        <Toolbar editing ={editing} setEditing={setEditing}/>
       </SudokuProvider>
     </SnackBarProvider>
     </>

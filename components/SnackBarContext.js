@@ -9,10 +9,13 @@ const SnackBarProvider = ({ children }) => {
     message: ''
   });
 
-  const showSnackbar = (message) => {
+  const showSnackbar = (message, type, color,time) => {
     setSnackbar({
       open: true,
-      message
+      message,
+      type,
+      color,
+      time
     });
 
     setTimeout(() => {
@@ -30,10 +33,10 @@ const SnackBarProvider = ({ children }) => {
 >
 <Alert
   onClose={() => setSnackbar({ ...snackbar, open: false })}
-  severity="error"
+  severity={snackbar.type}
   sx={{ 
     width: '100%', 
-    backgroundColor: 'red', 
+    backgroundColor: snackbar.color, 
     color: 'white',
     '& .MuiAlert-icon': {
       color: 'white'
