@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Grid } from '@mui/material';
 import Cell from './Cell';
-import { useSudoku } from './SudokuContext';
+import { useSudoku } from '../utils/SudokuContext';
 import { emptyGrid } from '@/utils/appconfig';
 
 const Game = ({editing}) => {

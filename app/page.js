@@ -2,10 +2,10 @@
 import React, { useState } from 'react';
 import Game from '../components/Game';
 import Toolbar from '../components/Toolbar';
-import { SudokuProvider } from '../components/SudokuContext';
-import SnackBarProvider from '@/components/SnackBarContext';
+import { SudokuProvider } from '../utils/SudokuContext';
+import SnackBarProvider from '@/utils/SnackBarContext';
 import { emptyGrid } from '@/utils/appconfig';
-import { useSudoku } from '../components/SudokuContext';
+import { useSudoku } from '../utils/SudokuContext';
 
 
 

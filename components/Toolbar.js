@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup } from '@mui/material';
-import { useSudoku } from './SudokuContext';
+import { useSudoku } from '../utils/SudokuContext';
 import { emptyGrid } from '@/utils/appconfig';
-import { useSnackbar } from './SnackBarContext';
+import { useSnackbar } from '../utils/SnackBarContext';
+import { solve } from '@/utils/solve';
 
 
 const Toolbar = ({editing,setEditing}) => {
@@ -16,6 +17,14 @@ const Toolbar = ({editing,setEditing}) => {
   };
 
   const handleSolve = () => {
+    const solvedGrid = solve(sudokuGrid);
+    if (solvedGrid){
+      showSnackbar("Sudoku Solved", "success","green");
+      setSudokuGrid(solvedGrid);
+    }
+    else{
+      showSnackbar("No Solution","error","red");
+    }
   };
 
   
@@ -40,7 +49,7 @@ const Toolbar = ({editing,setEditing}) => {
     if (savedGrid) {
       setSudokuGrid(JSON.parse(savedGrid));
       setLoaded(true);
-      showSnackbar("Template Loaded successfully");
+      showSnackbar("Template Loaded successfully", "success","green");
     } else {
       setLoaded(false);
       showSnackbar("No saved template found. Kindly edit and save a new template.",'error','red');
@@ -56,13 +65,14 @@ const Toolbar = ({editing,setEditing}) => {
         <Button onClick={handleSolve}>Solve</Button>
       }
       <Button onClick={handleEdit}>Edit</Button>
-      {editing &&
+      {editing ?
         <>
         <Button onClick={handleSave}>Save</Button>
         <Button onClick={handleReset}>Reset</Button>
         </>
+        :
+        <Button onClick={handleLoad}>Load Template</Button>
       }
-      <Button onClick={handleLoad}>Load Template</Button>
     </ButtonGroup>
   );
 };
