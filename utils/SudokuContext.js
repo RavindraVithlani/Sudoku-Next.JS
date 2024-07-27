@@ -14,8 +14,7 @@ export const SudokuProvider = ({ children }) => {
 
   // Function to update the cell value
   const onCellChange = (rowIndex, colIndex, value, group, target) => {
-    
-    if(value== "" || checkColumn(rowIndex,colIndex,value,sudokuGrid)&& checkRow(rowIndex,colIndex,value,sudokuGrid)&& checkGroup(group,value, target))
+    if(value== "" || checkColumn(rowIndex,colIndex,value,sudokuGrid)&& checkRow(rowIndex,colIndex,value,sudokuGrid) && checkGroup(group,value, target))
     {
       const updatedGrid = [...sudokuGrid];
       updatedGrid[rowIndex][colIndex] = { ...updatedGrid[rowIndex][colIndex], value };

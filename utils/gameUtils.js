@@ -18,14 +18,13 @@ export const checkRow =(row, col, value,grid)=>{
 }
 
 export const checkGroup =(group,value,targetElement)=>{
-    const group1Elements = document.querySelectorAll(`[data-group="${group}"]`);
-
-    group1Elements.forEach(element => {
-        // Skip the target element itself
-        if (element !== targetElement && element.value === value) {
-          return false
+    const groupElements = document.querySelectorAll(`[data-group="${group}"]`);
+    for(let i =0;i<groupElements.length;i++){
+        console.log(i," element value ", groupElements[i].value);   
+        if (groupElements[i].value == value && groupElements[i]!=targetElement){
+            return false;
         }
-      });
+    }
     return true;
     
 }
